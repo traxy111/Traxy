@@ -1,0 +1,17 @@
+{
+  "checks": [
+    {
+      "name": "Traxy repository",
+      "url": "https://api.github.com/repos/traxy111/Traxy",
+      "timeout": 10,
+      "expect": {
+        "status": 200,
+        "json": {
+          "full_name": "traxy111/Traxy",
+          "private": false
+        }
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install uv
+        run: python -m pip install --disable-pip-version-check uv==0.11.23
+
+      - name: Install project
+        run: uv sync --frozen --dev
+
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Test
+        run: uv run pytest --cov=traxy --cov-report=term-missing --cov-fail-under=80
+
+      - name: Build distributions
+        run: uv build
+
+      - name: Smoke-test wheel
+        run: |
+          python -m venv .smoke-venv
+          .smoke-venv/bin/python -m pip install --disable-pip-version-check dist/*.whl
+          .smoke-venv/bin/traxy --help
