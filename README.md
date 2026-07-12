@@ -1,6 +1,8 @@
 # Traxy
 
 [![CI](https://github.com/traxy111/Traxy/actions/workflows/ci.yml/badge.svg)](https://github.com/traxy111/Traxy/actions/workflows/ci.yml)
+[![TGWise monitor](https://github.com/traxy111/Traxy/actions/workflows/tgwise-monitor.yml/badge.svg)](https://github.com/traxy111/Traxy/actions/workflows/tgwise-monitor.yml)
+[![GitHub release](https://img.shields.io/github/v/release/traxy111/Traxy)](https://github.com/traxy111/Traxy/releases)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -10,6 +12,32 @@ output, and returns CI-friendly exit codes.
 
 It is designed for maintainers who want a transparent health check without
 running a monitoring server or adopting a large SDK.
+
+## Why Traxy
+
+- **Auditable:** the runtime is Python's standard library, with no transitive
+  runtime dependencies.
+- **Automation-friendly:** stable exit codes and JSON output work in CI,
+  scheduled jobs, and deployment verification.
+- **Small by design:** one configuration file describes public endpoint and
+  JSON-contract checks without a hosted monitoring control plane.
+
+## Quick start
+
+Run the example directly from a checkout:
+
+```bash
+python -m pip install -e .
+traxy run examples/traxy.json
+```
+
+Install the latest tagged release from GitHub with
+[pipx](https://pipx.pypa.io/) and run the same check:
+
+```bash
+pipx install "git+https://github.com/traxy111/Traxy.git@v0.1.0"
+traxy run examples/traxy.json
+```
 
 ## Features
 
@@ -94,6 +122,14 @@ Traxy never needs credentials for public endpoints. If your workflow injects
 private URLs or headers around Traxy, keep those values in your CI secret store
 and never commit them.
 
+## Production example
+
+Traxy is used to check [TGWise](https://tgwise.com/) pages, its sitemap, and a
+download manifest. The public configuration is in
+[`examples/tgwise.json`](examples/tgwise.json), and the scheduled
+[`TGWise monitor`](.github/workflows/tgwise-monitor.yml) runs that configuration
+daily and can also be started manually.
+
 ## Development
 
 ```bash
@@ -108,14 +144,18 @@ services.
 ## Project status
 
 Traxy is an early-stage project. Version `0.1.0` intentionally focuses on a
-small, auditable feature set. See the [changelog](CHANGELOG.md) and open an issue
-for a concrete use case before proposing a large feature.
+small, auditable feature set. See the [roadmap](ROADMAP.md),
+[changelog](CHANGELOG.md), and open an issue for a concrete use case before
+proposing a large feature.
 
 ## Contributing and security
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening
 a pull request. Please report security concerns as described in
 [SECURITY.md](SECURITY.md), not in a public issue.
+
+Project stewardship and response targets are documented in
+[MAINTAINERS.md](MAINTAINERS.md).
 
 ## License
 

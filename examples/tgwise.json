@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "name": "TGWise homepage",
+      "url": "https://tgwise.com/",
+      "timeout": 15,
+      "expect": {
+        "status": 200
+      }
+    },
+    {
+      "name": "TGWise starter pack",
+      "url": "https://tgwise.com/packs/windows-ai-agent-starter-pack/",
+      "timeout": 15,
+      "expect": {
+        "status": 200
+      }
+    },
+    {
+      "name": "TGWise sitemap",
+      "url": "https://tgwise.com/sitemap.xml",
+      "timeout": 15,
+      "expect": {
+        "status": 200
+      }
+    },
+    {
+      "name": "TGWise starter pack manifest",
+      "url": "https://tgwise.com/downloads/windows-ai-agent-starter-pack/manifest.json",
+      "timeout": 15,
+      "expect": {
+        "status": 200,
+        "json": {
+          "name": "TGWise Windows AI Agent Starter Pack",
+          "version": "1.0.0",
+          "format": "Markdown only",
+          "fileCount": 10
+        }
+      }
+    }
+  ]
+}
