@@ -10,13 +10,25 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "traxy111" }]
+keywords = ["ci", "health-check", "http", "json", "monitoring"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",
+  "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Testing",
+  "Topic :: System :: Monitoring",
 ]
+
+[project.urls]
+Changelog = "https://github.com/traxy111/Traxy/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/traxy111/Traxy#readme"
+Issues = "https://github.com/traxy111/Traxy/issues"
+Repository = "https://github.com/traxy111/Traxy"
 
 [project.scripts]
 traxy = "traxy.cli:main"
@@ -49,4 +61,3 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]
-
